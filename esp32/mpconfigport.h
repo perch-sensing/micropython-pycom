@@ -76,6 +76,7 @@
 #define MICROPY_PY_ARRAY_SLICE_ASSIGN               (1)
 #define MICROPY_PY_COLLECTIONS                      (1)
 #define MICROPY_PY_COLLECTIONS_DEQUE                (1)
+#define MICROPY_PY_COLLECTIONS_ORDEREDDICT          (1)
 #define MICROPY_PY_MATH                             (1)
 #define MICROPY_PY_CMATH                            (1)
 #define MICROPY_PY_IO                               (1)
