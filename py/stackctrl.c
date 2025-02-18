@@ -1,3 +1,4 @@
+#pragma GCC diagnostic ignored "-Wdangling-pointer=1"
 /*
  * This file is part of the MicroPython project, http://micropython.org/
  *
