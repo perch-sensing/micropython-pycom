@@ -1,13 +1,24 @@
 {
-  "version" : "2.1",
-  "partitions" : {
-    "factory"   : ["0x10000", "0x1EF000"],
-    "ota_0"     : ["0x210000", "0x1EF000"],
-    "otadata"   : ["0x1FF000", "0x1000"]
-    },
-  "script" : [
-      ["w", "bootloader", "bootloader.bin"],
-      ["w", "partitions", "partitions_8MB.bin"],
-      ["w", "factory", "lopy4.bin"]
+  "version": "2.1",
+  "partitions": {
+    "factory": ["0x10000", "0x380000"],
+    "ota_0"  : ["0x3A0000","0x5F000"],
+    "otadata": ["0x390000","0x2000"] },
+  "script": [
+    [
+      "w",
+      "bootloader",
+      "bootloader.bin"
+    ],
+    [
+      "w",
+      "partitions",
+      "partitions_8MB.bin"
+    ],
+    [
+      "w",
+      "factory",
+      "lopy4.bin"
     ]
+  ]
 }

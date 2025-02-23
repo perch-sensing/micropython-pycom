@@ -30,18 +30,18 @@ PYETH_ENABLED ?= 0
 PYGATE_ENABLED ?= 0
 
 # COAP is enabled by default
-MOD_COAP_ENABLED ?= 1
+MOD_COAP_ENABLED ?= 0
 
 # LORA is enabled by default for supported boards
 ifeq ($(BOARD), $(filter $(BOARD), LOPY LOPY4 FIPY))
-MOD_LORA_ENABLED ?= 1
+MOD_LORA_ENABLED ?= 0
 else
 MOD_LORA_ENABLED ?= 0
 endif
 
 # SIGFOX is enabled by default for supported boards
 ifeq ($(BOARD), $(filter $(BOARD), SIPY LOPY4 FIPY))
-MOD_SIGFOX_ENABLED ?= 1
+MOD_SIGFOX_ENABLED ?= 0
 else
 MOD_SIGFOX_ENABLED ?= 0
 endif
@@ -64,10 +64,10 @@ ifeq ($(VARIANT),PYGATE)
     ifneq ($(BOARD), $(filter $(BOARD), WIPY GPY LOPY4 ))
         $(error PYGATE variant is not supported on $(BOARD))
     endif
-    PYBYTES_ENABLED=1
-    PYETH_ENABLED=1
+    PYBYTES_ENABLED=0
+    PYETH_ENABLED=0
     MOD_LORA_ENABLED=0 # ETH and LORA are mutually exclusive
-    PYGATE_ENABLED=1
+    PYGATE_ENABLED=0
 endif
 
 ifeq ($(VARIANT),BASE)
@@ -123,7 +123,7 @@ CROSS_COMPILE = xtensa-esp32-elf-
 ESP_IDF_PATH = $(IDF_PATH)
 ESP_IDF_COMP_PATH = $(ESP_IDF_PATH)/components
 
-CFLAGS_XTENSA = -DESP_PLATFORM -Wpointer-arith -Wall -Werror=all -Wno-error=unused-function \
+CFLAGS_XTENSA = -DESP_PLATFORM -Wpointer-arith -Wall -Wno-error=unused-function \
                 -Wno-error=unused-but-set-variable -Wno-error=unused-variable -Wl,-EL \
                 -mlongcalls -Wall -ffunction-sections -fdata-sections -fno-common \
                 -Wno-sign-compare -Wno-old-style-declaration -fstrict-volatile-bitfields \
@@ -160,7 +160,7 @@ LIBS = -L$(ESP_IDF_COMP_PATH)/esp32/lib -L$(ESP_IDF_COMP_PATH)/esp32/ld -L$(ESP_
        $(ESP_IDF_COMP_PATH)/newlib/lib/libm-psram-workaround.a \
        $(ESP_IDF_COMP_PATH)/newlib/lib/libc-psram-workaround.a \
        -lfreertos -ljson -ljsmn -llwip -lnewlib -lvfs -lopenssl -lmbedtls -lwpa_supplicant \
-       -lxtensa-debug-module -lbt -lsdmmc -lsoc -lheap -lbootloader_support -lmicro-ecc \
+       -lbt -lsdmmc -lsoc -lheap -lbootloader_support -lmicro-ecc \
        -u ld_include_panic_highint_hdl -lsmartconfig_ack -lmesh -lesp_ringbuf -lmdns -lefuse -lespcoredump -lapp_update
 
 ifeq ($(MOD_COAP_ENABLED), 1)
